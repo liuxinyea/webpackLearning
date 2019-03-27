@@ -1,0 +1,11 @@
+dist/*
+temp/*
+node_modules/*
+.svn
+
+.DS_Store
+
+.idea
+build
+temp
+
