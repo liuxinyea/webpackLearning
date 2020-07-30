@@ -25,7 +25,7 @@
     "des.js": "^1.0.0",
     "detect-libc": "^1.0.3",
     "domain-browser": "^1.2.0",
-    "elliptic": "^6.4.1",
+    "elliptic": "^6.5.3",
     "emojis-list": "^2.1.0",
     "esrecurse": "^4.2.1",
     "estraverse": "^4.2.0",
