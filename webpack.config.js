@@ -62,8 +62,8 @@ module.exports = {
 						options:{
 							publicPath:'../'
 						}
-					},
-					'css-loader',
+			 		},
+			  		'css-loader',
 					'sass-loader'
 				]
             },

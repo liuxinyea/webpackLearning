@@ -1,12 +1,107 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<div id="app" class="container">
-			
-		</div>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+	<div id="app" class="container">
+
+	</div>
+</body>
+<script>
+	let entry = './app/main.js';
+	// 尝试异步加载、esModule、
+	let installedModule={};//已加载的模块的缓存
+	//CommonJS模块加载实现
+	function __webpack_require__(moduleId){
+	    if(installedModule[moduleId]){
+			//模块加载过，直接返回缓存中的模块
+			return installedModule[moduleId];
+		}
+		let module=installedModule[moduleId]={
+			id:moduleId,
+			loaded:false,//是否已加载完成
+			exports:{} //此文件模块对外的接口
+		}
+		//调用指定模块的加载函数，这个函数会执行模块代码，并为module.exports赋值
+		modules[moduleId].call(module.exports,module,module.exports,__webpack_require__);
+
+		module.loaded=true;//加载完成
+		//返回此模块的导出值
+		return module.exports;
+	}
+	//webpack编译后生成js文对应的一个对象，是一个文件名加执行函数的键值对，
+	在函数中执行本身的函数和
+	递归调用__webpack_require__来加载其他模块
+	let modules={
+		'./app/main.js':function ( module, __webpack_exports__ , __webpack_require__){
+			//module1的导入语句会编译，调用__webpack_require__加载函数，
+			//返回module1的导出值，即moduleId='./app/module1.js'的module对象
+			//的expots属性
+			var _module1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+				/*! ./module1 */ "./app/module1.js");
+
+			let app = document.getElementById("app");
+			app.innerHTML += `<span class="title">${_module1__WEBPACK_IMPORTED_MODULE_0__}</span>`;
+
+		},
+		'./app/module1.js':function ( module, __webpack_exports__ , __webpack_require__){
+
+			let message="Hello World"
+			//修改本身module对象的exports值，作为导出值
+			module.exports=message;
+
+		}
+	};
+	// 加载入口文件
+	__webpack_require__(entry);
+	(
+		function (modules) {
+			let installedModule = {};
+
+			function __webpack_require__(moduleId) {
+				if (installedModule[moduleId]) {
+					//模块加载过，直接返回缓存中的模块
+					return installedModule[moduleId];
+				}
+				let module = installedModule[moduleId] = {
+					id: moduleId,
+					loaded: false, //是否已加载完成
+					exports: {} //此文件模块对外的接口
+				}
+				//调用指定模块的加载函数，这个函数会执行模块代码，并为module.exports赋值
+				modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+				module.loaded = true; //加载完成
+				//返回此模块的导出值
+				return module.exports;
+			}
+			return __webpack_require__(entry);
+		}
+	)({
+		'./app/main.js': function (module, __webpack_exports__, __webpack_require__) {
+			//module1的导入语句会编译，调用__webpack_require__加载函数，
+			//返回module1的导出值，即moduleId='./app/module1.js'的module对象
+			//的expots属性
+			var _module1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+				/*! ./module1 */
+				"./app/module1.js");
+			//读取文件内容
+			let app = document.getElementById("app");
+			app.innerHTML += `<span class="title">${_module1__WEBPACK_IMPORTED_MODULE_0__}</span>`;
+
+		},
+		'./app/module1.js': function (module, __webpack_exports__, __webpack_require__) {
+
+			let message = "Hello World"
+			//修改本身module对象的exports值，作为导出值
+			module.exports = message;
+
+		}
+	});
+</script>
+
 </html>
