@@ -18,7 +18,7 @@
     "cyclist": "^0.2.2",
     "date-now": "^0.1.4",
     "debug": "^2.6.9",
-    "decode-uri-component": "^0.2.0",
+    "decode-uri-component": "^0.2.1",
     "deep-extend": "^0.6.0",
     "define-property": "^2.0.2",
     "delegates": "^1.0.0",
